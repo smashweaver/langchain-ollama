@@ -1,14 +1,19 @@
-# How to use
+## This project uses poetry for dependency management.
 
-## Bootstrap using poetry
+### Install dependencies
 
 ```bash
-deactivate
 make init
 ```
 
-## Exit shell
+### List depependencies
 
 ```bash
-exit
+make list
+```
+
+### Run the app
+
+```bash
+make run
 ```

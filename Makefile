@@ -1,5 +1,10 @@
-.PHONY: init
+.PHONY: init, lis, run
 
-init:	
-	@poetry shell
-	@poetry install --no-root
+init:
+	@poetry install
+
+list:
+	@poetry install --dry-run --sync --no-ansi
+
+run:
+	@poetry run python app.py
