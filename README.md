@@ -1,14 +1,13 @@
 # How to use
 
-1. Clone the repository
-
-2. Bootstrap using poetry
+## Bootstrap using poetry
 
 ```bash
-make start
+deactivate
+make init
 ```
 
-3. Exit shell
+## Exit shell
 
 ```bash
 exit
