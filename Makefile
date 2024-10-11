@@ -1,6 +1,9 @@
-.PHONY: init, lis, run
+.PHONY: init, list, run, shell, diff
 
-init:
+shell:
+	@poetry shell
+
+init: shell
 	@poetry install
 
 list:
@@ -8,3 +11,6 @@ list:
 
 run:
 	@poetry run python app.py
+
+diff:
+	@git --no-pager diff
