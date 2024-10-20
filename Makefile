@@ -4,7 +4,7 @@ shell:
 	@poetry shell
 
 init: shell
-	@poetry install
+	@poetry install --sync
 
 list:
 	@poetry install --dry-run --sync --no-ansi

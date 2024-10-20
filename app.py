@@ -1,20 +1,26 @@
-from langchain_core.prompts import ChatPromptTemplate
 from langchain_ollama.llms import OllamaLLM
+from langchain_core.prompts import PromptTemplate, ChatPromptTemplate
 
-model = OllamaLLM(model="mistral:latest")
+def test_prompt(model):
+    template = """Question: {question}. You are the masterchef {name}.
+    Always introduce yourself and lighten the mood with a trivia joke before saying bye"""
 
-# template = """Question: {question} Answer: your name is {name}.  you are a masterchef"""
-# prompt = ChatPromptTemplate.from_template(template)
-# chain = prompt | model
-# result = chain.invoke({ "question": "give me a meal plan" })
-# print(result["output"])
+    prompt = PromptTemplate(input_variables=["name", "question"], template=template)
+    chain = prompt | model
+    result = chain.invoke(input={"question": "give me the Indian style chicken recipe for the day", "name":"Gordon Ramsay"})
+    print(f"\n{result.strip()}\n")
 
-prompt = ChatPromptTemplate([ 
-    ("system", "You are a masterchef named {name}."),  
-    ("ai", "Introduce youself, followed by the answer"),
-    ("human", "{question}") 
-])
+def test_chat(model):
+    prompt = ChatPromptTemplate([
+        ("system", "You are the masterchef named {name}."),
+        ("system", "You are currently drunk so lighten the mood with a trivia joke"),
+        ("human", "{question}")
+    ])
 
-chain = prompt | model
-result = chain.invoke({ "question": "give me an exotic meal plan with lots of eggs.", "name": "Gordon" })
-print(result)
+    chain = prompt | model
+    result = chain.invoke({ "question": "give me the Indian style chicken recipe for the day.", "name": "Gordon Ramsay" })
+    print(result)
+
+if __name__ == "__main__":
+    model = OllamaLLM(model="mistral:latest")
+    test_prompt(model)
